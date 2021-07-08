@@ -1,0 +1,90 @@
+<body>
+<script>
+    /*
+    computerPlay() returns a choice of "rock/paper/scissors"
+    playerSelection() takes input and converts string to lowercase "rock/paper/scissors"
+    if input is not a choice, send error message to "Try again"
+    */
+    function computerPlay() {
+        var play = ['rock', 'paper', 'scissor'];
+        var random = play[Math.floor(Math.random() * play.length)];
+        return random;
+    }
+
+    function playerInput(string) {
+        var lowered = string.toLowerCase();
+        return lowered;
+    }
+
+    // Runs one single round of rock/paper/scissor
+    function playRound(playerSelection) {
+        playerSelection = window.prompt("Type in your answer")
+        loweredInput = playerInput(playerSelection);
+        computerSelection = computerPlay();
+        console.log(`The computer chose ${computerSelection} as its choice.`);
+        gameTest();
+        scoreBoard();
+    }
+
+    let playerScore = 0;
+    let computerScore = 0;
+
+    function scoreBoard() {
+        boardMessage = `[The player has won ${playerScore} times while the computer has won ${computerScore} times]`;
+        console.log(boardMessage);
+    }
+  
+    function game() {
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        playRound();
+        playerScore > computerScore ? console.log("You won the game") : console.log("You lost the game");
+        restartGame();
+    }
+
+    function restartGame() {
+        playerScore = 0;
+        computerScore = 0;
+    }
+    
+    // Codes for the three possible outcomes: Win, lose, or invalid
+    function win() {
+        console.log("You won the game!");
+        playerScore ++;
+        return playerScore;
+    }
+    function lose() {
+        console.log("You lost the round!");
+        computerScore ++;
+        return computerScore;
+    }
+    function tie() {
+        console.log("This was a tie!");
+    }
+    function invalidAnswer() {
+        console.log("This is not an option, try again!")
+        playRound();
+    }
+
+    // Function compares loweredInput vs computerSelection to give a game outcome
+    function gameTest() {
+        if (loweredInput === 'rock') 
+            computerSelection === 'scissor' ? win() 
+            : computerSelection === 'rock' ? tie() 
+            : lose();
+        else if (loweredInput === 'paper')
+            computerSelection === 'rock' ? win() 
+            : computerSelection === 'paper' ? tie()
+            : lose();
+        else if (loweredInput === 'scissor')
+            computerSelection === 'paper' ? win()
+            : computerSelection === 'scissor' ? tie()
+            : lose();
+        else   
+            invalidAnswer();
+    }
+
+</script>
+</body>
