@@ -1,4 +1,13 @@
 <body>
+    <div id='buttons'>
+        <button id="rockButton">Rock</button>
+        <button id="paperButton">Paper</button>
+        <button id="scissorButton">Scissors</button>
+    </div>
+    <div id = "score"></div>
+    <div id = "compChoice"></div>
+    <div id = "result"></div>
+
 <script>
     /*
     computerPlay() returns a choice of "rock/paper/scissors"
@@ -18,23 +27,40 @@
 
     // Runs one single round of rock/paper/scissor
     function playRound(playerSelection) {
-        playerSelection = window.prompt("Type in your answer")
-        loweredInput = playerInput(playerSelection);
+    //    playerSelection = window.prompt("Type in your answer")
+    //    loweredInput = playerInput(playerSelection);
+        loweredInput = playerSelection;
         computerSelection = computerPlay();
-        console.log(`The computer chose ${computerSelection} as its choice.`);
+        compChoice = `The computer chose ${computerSelection} as its choice.`;
+        document.querySelector('#compChoice').innerHTML = compChoice;
         gameTest();
         scoreBoard();
+        checkGame();
+    }
+
+    function checkGame() {
+        if (playerscore || computerScore == 5) {
+            restartGame();
+            if (playerscore > computerScore) {
+                result = `You won the game!`;
+                document.querySelector('#result').innerHTML = result;
+            } else {
+                result = `The computer won the game!`;
+                document.querySelector('#result').innerHTML = result;
+            }
+        }
     }
 
     let playerScore = 0;
     let computerScore = 0;
 
     function scoreBoard() {
-        boardMessage = `[The player has won ${playerScore} times while the computer has won ${computerScore} times]`;
+        boardMessage = `The player has won ${playerScore} times while the computer has won ${computerScore} times`;
         console.log(boardMessage);
+        document.querySelector('#score').innerHTML = boardMessage;
     }
   
-    function game() {
+ /*   function game() {
         playRound();
         playRound();
         playRound();
@@ -43,7 +69,7 @@
         playerScore > computerScore ? console.log("You won the game") : console.log("You lost the game");
         restartGame();
     }
-
+*/
     function restartGame() {
         playerScore = 0;
         computerScore = 0;
@@ -51,20 +77,24 @@
     
     // Codes for the three possible outcomes: Win, lose, or invalid
     function win() {
-        console.log("You won the game!");
+        let result = `You won the round!`;
         playerScore ++;
+        document.querySelector('#result').innerHTML = result;
         return playerScore;
     }
     function lose() {
-        console.log("You lost the round!");
+        let result = `You lost the round!`;
         computerScore ++;
+        document.querySelector('#result').innerHTML = result;
         return computerScore;
     }
     function tie() {
-        console.log("This was a tie!");
+        let result = `This was a tie!`;
+        document.querySelector('#result').innerHTML = result;
     }
     function invalidAnswer() {
-        console.log("This is not an option, try again!")
+        let result = `This is not an option, try again!`;
+        document.querySelector('#result').innerHTML = result;
         playRound();
     }
 
@@ -86,5 +116,21 @@
             invalidAnswer();
     }
 
+const rockBtn = document.querySelector("#rockButton");
+    rockBtn.addEventListener('click', () => {
+        playRound("rock");
+    });
+const paperBtn = document.querySelector("#paperButton");
+    paperBtn.addEventListener('click', () => {
+        playRound("paper");
+    });
+const scissorBtn = document.querySelector("#scissorButton");
+    scissorBtn.addEventListener('click', () => {
+        playRound("scissor");
+    });
+
+
 </script>
+
+
 </body>
