@@ -27,11 +27,11 @@ function playRound(playerSelection) {
 function checkGame() {
     if (playerScore == 5 || computerScore == 5) {
         if (playerScore > computerScore) {
-            result = `You won the game!`;
+            result = `You won the game! The game will restart.`;
             document.querySelector('#result').innerHTML = result;
             restartGame();
         } else {
-            result = `The computer won the game!`;
+            result = `The computer won the game! The game will restart.`;
             document.querySelector('#result').innerHTML = result;
             restartGame();
         }
